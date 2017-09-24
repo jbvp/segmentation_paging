@@ -15,8 +15,10 @@ int main(int argc, char *argv[])
 	printf("&localvar = 0x%lx\n", addr);
 
 	fd = open("/dev/paging", O_WRONLY);
-	if (fd < 0)
+	if (fd < 0) {
+		perror("Error opening /dev/paging");
 		return errno;
+	}
 
 	write(fd, &addr, sizeof(unsigned long));
 

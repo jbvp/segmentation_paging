@@ -1,8 +1,8 @@
 Paging
 ======
 
-The `paging` kernel module walks through the paging structures, starting from a
-linear address and ending to a physical address.
+The `paging` kernel module walks through the paging structures to translate a
+linear address to a physical address.
 
 Initialization
 --------------

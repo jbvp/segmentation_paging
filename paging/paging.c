@@ -1,8 +1,11 @@
 /*
- * The `paging` kernel module walks through the IA-32e (x86-64) paging
- * structures to a translate a linear address to a physical address.
+ * The paging kernel module walks through the IA-32e (x86-64) paging
+ * structures to translate a linear address to a physical address.
  *
- * Note: 2-Mbyte and 1-GByte pages are not supported by this kernel module.
+ * For educational purposes, the kernel structures are not used.
+ * Page structures are manually parsed.
+ *
+ * Note: 2-MByte and 1-GByte pages are not supported by this kernel module.
  */
 #include <linux/module.h>
 #include <linux/init.h>

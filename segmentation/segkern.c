@@ -1,5 +1,11 @@
 /*
- * Note: Local Descriptor Tables are not supported by this module.
+ * The segkern module prints the following information:
+ * - the code, stack and data segment selectors from the cs, ss and ds registers
+ * - the Global Descriptor Table base and limit from the GDT register
+ *   (retreived with the `sgdt` instruction)
+ * - the Global Descriptor Table entries: the segment descriptors
+ *
+ * Note: Local Descriptor Tables are not supported.
  */
 #include <linux/module.h>
 #include <linux/init.h>

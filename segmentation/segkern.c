@@ -43,7 +43,7 @@ static int __init segkern_init(void)
 	if (gdtr.base == 0 || gdtr.limit == 0)
 		store_gdtr(&gdtr);
 
-	maxentries = gdtr.limit / 8;
+	maxentries = (gdtr.limit + 1) / 8;
 
 	pr_debug("gdtr.base = 0x%lx\n", gdtr.base);
 	pr_debug("gdtr.limit = 0x%hx (max entries = %u)\n",

@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
 	printf("&localvar = %p\n", &localvar);
 
-	maxentries = gdtr.limit / 8;
+	maxentries = (gdtr.limit + 1) / 8;
 
 	printf("gdtr.base = 0x%lx\n", gdtr.base);
 	printf("gdtr.limit = 0x%hx (max entries = %u)\n",

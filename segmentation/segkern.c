@@ -12,11 +12,6 @@
 #include "segmentation.h"
 
 static struct descriptor_table_register gdtr;
-static unsigned int index;
-
-module_param_named(base, gdtr.base, ulong, 0);
-module_param_named(limit, gdtr.limit, ushort, 0);
-module_param(index, uint, 0);
 
 static void print_segment_selector(char *name, unsigned short ss)
 {
@@ -46,8 +41,7 @@ static int __init segkern_init(void)
 	struct segment_descriptor *descriptor_table;
 	int maxentries, i;
 
-	if (gdtr.base == 0 || gdtr.limit == 0)
-		store_gdtr(&gdtr);
+	store_gdtr(&gdtr);
 
 	// The limit is expressed in bytes and references the last valid byte
 	// of the table (=> total number of valid bytes - 1)
@@ -59,20 +53,12 @@ static int __init segkern_init(void)
 
 	descriptor_table = (struct segment_descriptor *)gdtr.base;
 
-	if (index) {
+	print_segment_selector("cs", get_cs());
+	print_segment_selector("ss", get_ss());
+	print_segment_selector("ds", get_ds());
 
-		print_descriptor_table(descriptor_table, index);
-
-	} else {
-
-		print_segment_selector("cs", get_cs());
-		print_segment_selector("ss", get_ss());
-		print_segment_selector("ds", get_ds());
-
-		for (i = 0; i < maxentries; i++)
-			print_descriptor_table(descriptor_table, i);
-
-	}
+	for (i = 0; i < maxentries; i++)
+		print_descriptor_table(descriptor_table, i);
 
 	return 0;
 }

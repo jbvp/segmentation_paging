@@ -49,6 +49,8 @@ static int __init segkern_init(void)
 	if (gdtr.base == 0 || gdtr.limit == 0)
 		store_gdtr(&gdtr);
 
+	// The limit is expressed in bytes and references the last valid byte
+	// of the table (=> total number of valid bytes - 1)
 	maxentries = (gdtr.limit + 1) / 8;
 
 	pr_debug("gdtr.base = 0x%lx\n", gdtr.base);
